@@ -15,7 +15,7 @@ class Login extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-   // console.log('next props', nextProps);
+    // console.log('next props', nextProps);
 
     if (nextProps.auth.isAuthenticated) {
       this.props.history.push("/dashboard"); // push user to dashboard when they login
@@ -32,6 +32,7 @@ class Login extends Component {
   onChange = (e) => {
     this.setState({ [e.target.id]: e.target.value });
   };
+
   onSubmit = (e) => {
     e.preventDefault();
 
@@ -43,6 +44,13 @@ class Login extends Component {
     this.props.loginUser(userData);
     //console.log(userData);
   };
+
+  demoLogin = () => {
+    this.setState({
+      email: "demo@demo.com",
+      password: "password"
+    });
+  }
 
   render() {
     const { errors } = this.state;
@@ -97,7 +105,7 @@ class Login extends Component {
                   {errors.passwordincorrect}
                 </span>
               </div>
-              <div className="col s12" style={{ paddingLeft: "11.250px" }}>
+              <div className="col s12 m6 center-align" style={{ paddingLeft: "11.250px" }}>
                 <button
                   style={{
                     width: "150px",
@@ -106,9 +114,24 @@ class Login extends Component {
                     marginTop: "1rem",
                   }}
                   type="submit"
-                  className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+                  className="btn btn-large waves-effect waves-light hoverable teal lighten-3"
                 >
                   Login
+                </button>
+              </div>
+              <div className="col s12 m6 center-align" style={{ paddingLeft: "11.250px" }}>
+                <button
+                  style={{
+                    width: "150px",
+                    borderRadius: "3px",
+                    letterSpacing: "1.5px",
+                    marginTop: "1rem",
+                  }}
+                  onClick={this.demoLogin}
+                  type="submit"
+                  className="btn btn-large waves-effect waves-light hoverable teal lighten-3"
+                >
+                  DEMO
                 </button>
               </div>
             </form>
