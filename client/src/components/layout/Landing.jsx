@@ -1,20 +1,37 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+import money_pic from "../../img/money_pic.png";
 class Landing extends Component {
+  componentDidMount() {
+    // If logged in, should redirect them to dashboard
+    if (this.props.auth.isAuthenticated) {
+      this.props.history.push("/dashboard");
+    }
+  }
   render() {
     return (
       <div style={{ height: "75vh" }} className="container valign-wrapper">
         <div className="row">
           <div className="col s12 center-align">
-            <h4>
-              <b>Build</b> a login/auth app with the{" "}
-              <span style={{ fontFamily: "monospace" }}>MERN</span> stack from
-              scratch
+            <img
+              src={money_pic}
+              style={{ width: "350px" }}
+              className="responsive-img credit-card"
+              alt="Undraw"
+            />
+            <h4 className="flow-text">
+              One Stop Financial Account Management System
             </h4>
-            <p className="flow-text grey-text text-darken-1">
-              Create a (minimal) full-stack app with user authentication via
-              passport and JWTs
-            </p>
+            <h4 className="flow-text">
+              Developped with <span style={{ fontFamily: "monospace" }}>MERN</span> stack
+            </h4>
+            <div className="msg-alert" role="alert">
+              Attention: DEMO Only
+            </div>
+
+
             <br />
             <div className="col s6">
               <Link
@@ -22,9 +39,9 @@ class Landing extends Component {
                 style={{
                   width: "140px",
                   borderRadius: "3px",
-                  letterSpacing: "1.5px",
+                  letterSpacing: "1.5px"
                 }}
-                className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+                className="btn btn-large waves-effect waves-light hoverable teal lighten-3"
               >
                 Register
               </Link>
@@ -35,7 +52,7 @@ class Landing extends Component {
                 style={{
                   width: "140px",
                   borderRadius: "3px",
-                  letterSpacing: "1.5px",
+                  letterSpacing: "1.5px"
                 }}
                 className="btn btn-large btn-flat waves-effect white black-text"
               >
@@ -48,4 +65,10 @@ class Landing extends Component {
     );
   }
 }
-export default Landing;
+Landing.propTypes = {
+  auth: PropTypes.object.isRequired
+};
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+export default connect(mapStateToProps)(Landing);
