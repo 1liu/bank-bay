@@ -20,7 +20,9 @@ const client = new plaid.Client(
   PLAID_SECRET,
   PLAID_PUBLIC_KEY,
   plaid.environments.sandbox,
-  { version: "2018-05-22" }
+  {
+    version: '2019-05-29', // specify API version
+  }
 );
 
 var PUBLIC_TOKEN = null;
